@@ -1,9 +1,11 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "../../utils/axios";
 import useForm from "../../hooks/useForm";
 import BlackButton from "../UI/button/blackButton";
 import Input from "../UI/input";
 import Progress from "../UI/progress/Progress";
+import { danger, warning } from "../../utils/toast";
+import { useHistory } from "react-router-dom";
 
 /* window.M.toast({ html, classes: 'info' }); */
 /* window.axios = axios; */
@@ -24,6 +26,16 @@ const INITIAL_VALIDATE = {
 };
 
 const Login = () => {
+	const history = useHistory();
+
+	const [isAuthenticated, setAuthenticated] = useState(false);
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			history.push("/");
+		}
+	}, [history, isAuthenticated]);
+
 	const [checkForm, setCheckForm] = useState(false);
 
 	const { values, handlers } = useForm(INITIAL_VALUES, INITIAL_VALIDATE);
@@ -43,17 +55,23 @@ const Login = () => {
 
 			setCheckForm(true);
 
-			/* await new Promise((resolve) => setTimeout(resolve, 20000)); */
+			try {
+				const {
+					data: [user],
+				} = await axios.get("profile", {
+					params: values,
+				});
 
-			const {
-				data: [user],
-			} = await axios.get("profile", {
-				params: values,
-			});
-
-			console.log(user);
-
-			setCheckForm(false);
+				if (!user) {
+					warning("Введены не верные данные");
+				} else {
+					setAuthenticated(true);
+				}
+			} catch (ex) {
+				danger(JSON.stringify(ex));
+			} finally {
+				setCheckForm(false);
+			}
 		},
 		[setCheckForm, values]
 	);
