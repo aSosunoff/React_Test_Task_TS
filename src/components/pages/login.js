@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import useForm from "../../hooks/useForm";
 import BaseButton from "../button/baseButton/";
 import Input from "../input";
@@ -15,23 +15,45 @@ const INITIAL_VALIDATE = {
 };
 
 const Login = () => {
-	const [checkForm /* , setCheckForm */] = useState(false);
+	const [checkForm, setCheckForm] = useState(false);
 
-	const { /* values, */ handlers /* , reset */ } = useForm(
-		INITIAL_VALUES,
-		INITIAL_VALIDATE
+	const { values, handlers } = useForm(INITIAL_VALUES, INITIAL_VALIDATE);
+
+	const disabledSubmit = useMemo(
+		() =>
+			Object.values(handlers).reduce(
+				(acc, { invalid }) => acc || invalid,
+				false
+			),
+		[handlers]
+	);
+
+	const loginHandler = useCallback(
+		(e) => {
+			e.preventDefault();
+			setCheckForm(true);
+			setTimeout(() => {
+				console.log(values);
+				setCheckForm(false);
+			}, 1000);
+		},
+		[setCheckForm, values]
 	);
 
 	return (
 		<form
-			className="grid-layout__item-center card hoverable"
-			onSubmit={(e) => e.preventDefault()}
+			className="card hoverable"
+			style={{
+				gridArea: "cc",
+				margin: 0,
+			}}
+			onSubmit={loginHandler}
 		>
 			<div className="card-content">
 				<span className="card-title">Вход в систему</span>
 
 				<Input
-					label="Табельный, Имя, Email"
+					label="Логин"
 					disabled={checkForm}
 					value={handlers.name.value}
 					onChange={handlers.name.onChange}
@@ -52,13 +74,8 @@ const Login = () => {
 
 			{!checkForm ? (
 				<div className="card-action">
-					<BaseButton
-						type="submit"
-						onClick={() => {
-							console.log(111);
-						}}
-					>
-						Нажми
+					<BaseButton type="submit" disabled={disabledSubmit}>
+						Войти
 					</BaseButton>
 					{/* <BlackButton type="submit">
 					Войти
