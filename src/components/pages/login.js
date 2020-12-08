@@ -5,10 +5,12 @@ import BlackButton from "../UI/button/blackButton";
 import Input from "../UI/input";
 import Progress from "../UI/progress/Progress";
 
-window.axios = axios;
+/* window.M.toast({ html, classes: 'info' }); */
+/* window.axios = axios; */
 /* axios.get('profile', { params: { name: 'admin24' }}).then(({ data }) => console.log(data)) */
 /* axios.post('profile', { id: 1, name: '1', password: '123' }) */
 /* axios.put('profile/1', { name: '1', password: '123121212' }) */
+/* http://zetcode.com/javascript/jsonserver/ */
 
 const INITIAL_VALUES = { name: "admin", password: "1234" };
 const INITIAL_VALIDATE = {

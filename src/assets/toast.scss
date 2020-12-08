@@ -1,0 +1,14 @@
+#toast-container {
+	& .info {
+		background-color: var(--color-primary);
+		color: #fff;
+	}
+	& .warning {
+		background-color: var(--color-warning);
+		color: rgb(61, 61, 61);
+	}
+	& .danger {
+		background-color: var(--color-error);
+		color: rgb(61, 61, 61);
+	}
+}
