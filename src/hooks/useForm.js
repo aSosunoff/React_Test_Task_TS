@@ -14,7 +14,7 @@ export default (initialValues = {}, initialValidation = {}) => {
 					return {
 						...acc,
 						[key]: {
-							invalid: isRequired || isMinLength,
+							invalid: isRequired || isMinLength || false,
 							invalidMessage: isRequired
 								? "Необходимо заполнить поле"
 								: isMinLength
