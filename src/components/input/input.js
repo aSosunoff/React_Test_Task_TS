@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
 import cn from "classnames";
+import styles from "./Input.module.scss";
 
 const Input = ({
 	type,
@@ -9,7 +10,6 @@ const Input = ({
 	invalid,
 	invalidMessage,
 	className,
-	styles,
 	onChange,
 	...attrsInput
 }) => {
@@ -19,7 +19,7 @@ const Input = ({
 		onChange,
 	]);
 	return (
-		<div>
+		<div className={styles.input_container}>
 			<input
 				id={uniq}
 				type={type}
@@ -38,7 +38,7 @@ const Input = ({
 			</label>
 
 			{invalid ? (
-				<small className="helper-text invalid" v-if="invalid">
+				<small className={cn("helper-text invalid", styles.invalid)}>
 					{invalidMessage}
 				</small>
 			) : null}
