@@ -15,7 +15,7 @@ const BaseButton = ({
 	const classDisabled = { [styles.disabled]: disabled };
 
 	if (disabled) {
-		delete props.onClick;
+		props.onClick = (e) => e.preventDefault();
 	}
 
 	const buttonElement = React.createElement(

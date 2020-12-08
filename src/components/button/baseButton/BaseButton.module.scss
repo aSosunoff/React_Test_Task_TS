@@ -9,6 +9,11 @@
 	line-height: 20px;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	width: 100%;
+
+	&:focus {
+		background-color: inherit;
+	}
+
 	&.disabled {
 		color: #fff !important;
 		background-color: var(--color-disabled) !important;
@@ -21,7 +26,7 @@
 }
 .button__invalid {
 	color: var(--red);
-	
+
 	&.disabled {
 		color: var(--color-disabled);
 	}
