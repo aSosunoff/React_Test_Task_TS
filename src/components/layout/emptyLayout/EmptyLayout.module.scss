@@ -1,0 +1,13 @@
+.grid-layout {
+	display: grid;
+	grid-template-areas:
+		"tl tc tr"
+		"cl cc cr"
+		"bl bc br";
+	height: 100vh;
+	width: 100vw;
+
+	align-items: center;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr;
+}
