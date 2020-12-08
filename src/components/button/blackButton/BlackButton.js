@@ -12,17 +12,4 @@ const BlackButton = ({ children, ...props }) => (
 	</BaseButton>
 );
 
-/* BaseButton.defaultProps = {
-	tag: "button",
-	type: "button",
-};
-
-BaseButton.propTypes = {
-	tag: PropTypes.oneOf(["button", "a", "Link"]),
-	type: PropTypes.oneOf(["button", "submit", "reset"]),
-	disabled: PropTypes.bool,
-	invalid: PropTypes.bool,
-	invalidMessage: PropTypes.string,
-}; */
-
 export default BlackButton;
