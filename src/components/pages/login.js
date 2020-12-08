@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useForm from "../../hooks/useForm";
+import BaseButton from "../button/baseButton/";
 import Input from "../input";
 
 const INITIAL_VALUES = { name: "admin", password: "1234" };
@@ -23,7 +24,8 @@ const Login = () => {
 
 	return (
 		<form
-			className="grid-layout__item-center card hoverable" /* @submit.prevent="login" */
+			className="grid-layout__item-center card hoverable"
+			onSubmit={(e) => e.preventDefault()}
 		>
 			<div className="card-content">
 				<span className="card-title">Вход в систему</span>
@@ -48,16 +50,26 @@ const Login = () => {
 				/>
 			</div>
 
-			{/* <div className="card-action" v-if="!checkForm">
-				<BlackButton type="submit">
+			{!checkForm ? (
+				<div className="card-action">
+					<BaseButton
+						type="submit"
+						onClick={() => {
+							console.log(111);
+						}}
+					>
+						Нажми
+					</BaseButton>
+					{/* <BlackButton type="submit">
 					Войти
 					<i className="material-icons right">send</i>
-				</BlackButton>
-			</div>
-
-			<div className="progress" v-else>
-				<div className="indeterminate"></div>
-			</div> */}
+				</BlackButton> */}
+				</div>
+			) : (
+				<div className="progress">
+					<div className="indeterminate"></div>
+				</div>
+			)}
 		</form>
 	);
 };
