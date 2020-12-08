@@ -1,7 +1,14 @@
 import React, { useCallback, useMemo, useState } from "react";
+import axios from "../../utils/axios";
 import useForm from "../../hooks/useForm";
-import BlackButton from "../button/blackButton";
-import Input from "../input";
+import BlackButton from "../UI/button/blackButton";
+import Input from "../UI/input";
+import Progress from "../UI/progress/Progress";
+
+window.axios = axios;
+/* axios.get('profile', { params: { name: 'admin24' }}).then(({ data }) => console.log(data)) */
+/* axios.post('profile', { id: 1, name: '1', password: '123' }) */
+/* axios.put('profile/1', { name: '1', password: '123121212' }) */
 
 const INITIAL_VALUES = { name: "admin", password: "1234" };
 const INITIAL_VALIDATE = {
@@ -29,13 +36,22 @@ const Login = () => {
 	);
 
 	const loginHandler = useCallback(
-		(e) => {
+		async (e) => {
 			e.preventDefault();
+
 			setCheckForm(true);
-			setTimeout(() => {
-				console.log(values);
-				setCheckForm(false);
-			}, 1000);
+
+			/* await new Promise((resolve) => setTimeout(resolve, 20000)); */
+
+			const {
+				data: [user],
+			} = await axios.get("profile", {
+				params: values,
+			});
+
+			console.log(user);
+
+			setCheckForm(false);
 		},
 		[setCheckForm, values]
 	);
@@ -72,18 +88,14 @@ const Login = () => {
 				/>
 			</div>
 
-			{!checkForm ? (
-				<div className="card-action">
-					<BlackButton type="submit" disabled={disabledSubmit}>
-						Войти
-						<i className="material-icons right">send</i>
-					</BlackButton>
-				</div>
-			) : (
-				<div className="progress">
-					<div className="indeterminate"></div>
-				</div>
-			)}
+			<div className="card-action">
+				<BlackButton type="submit" disabled={disabledSubmit || checkForm}>
+					Войти
+					<i className="material-icons right">send</i>
+				</BlackButton>
+			</div>
+
+			<Progress canVisible={checkForm} />
 		</form>
 	);
 };
