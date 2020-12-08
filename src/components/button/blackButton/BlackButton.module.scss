@@ -1,0 +1,10 @@
+.black {
+	& .button {
+		background-color: var(--color-title);
+		color: #fff;
+	}
+	& .button:hover {
+		background-color: #5f7885;
+		color: #fff;
+	}
+}

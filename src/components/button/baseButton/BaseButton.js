@@ -9,6 +9,8 @@ const BaseButton = ({
 	disabled,
 	invalid,
 	invalidMessage,
+	classNameContainer,
+	classNameButton,
 	children,
 	...props
 }) => {
@@ -22,7 +24,7 @@ const BaseButton = ({
 		tag,
 		{
 			key: "button",
-			className: cn(styles.button, classDisabled),
+			className: cn(classNameButton, styles.button, classDisabled),
 			type,
 			...props,
 		},
@@ -40,7 +42,10 @@ const BaseButton = ({
 		  )
 		: null;
 
-	return React.createElement("div", null, [buttonElement, invalidElement]);
+	return React.createElement("div", { className: classNameContainer }, [
+		buttonElement,
+		invalidElement,
+	]);
 };
 
 BaseButton.defaultProps = {

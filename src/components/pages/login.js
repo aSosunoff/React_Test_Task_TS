@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import useForm from "../../hooks/useForm";
-import BaseButton from "../button/baseButton/";
+import BlackButton from "../button/blackButton";
 import Input from "../input";
 
 const INITIAL_VALUES = { name: "admin", password: "1234" };
@@ -74,13 +74,10 @@ const Login = () => {
 
 			{!checkForm ? (
 				<div className="card-action">
-					<BaseButton type="submit" disabled={disabledSubmit}>
+					<BlackButton type="submit" disabled={disabledSubmit}>
 						Войти
-					</BaseButton>
-					{/* <BlackButton type="submit">
-					Войти
-					<i className="material-icons right">send</i>
-				</BlackButton> */}
+						<i className="material-icons right">send</i>
+					</BlackButton>
 				</div>
 			) : (
 				<div className="progress">
