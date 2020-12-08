@@ -1,0 +1,28 @@
+.button {
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--box-shadow);
+	transition: all 0.2s linear;
+	padding: 5px 10px;
+	line-height: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	width: 100%;
+	&.disabled {
+		color: #fff !important;
+		background-color: var(--color-disabled) !important;
+	}
+	&:hover:not(.disabled) {
+		cursor: pointer;
+		color: #fff;
+		background-color: var(--color-title);
+	}
+}
+.button__invalid {
+	color: var(--red);
+	
+	&.disabled {
+		color: var(--color-disabled);
+	}
+}
