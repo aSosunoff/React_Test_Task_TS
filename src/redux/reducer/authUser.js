@@ -5,7 +5,6 @@ const initialState = {
 	loading: false,
 	loaded: false,
 	error: null,
-	isAuthenticated: false,
 	user: {},
 };
 
@@ -18,7 +17,6 @@ const handlers = {
 		draft.loaded = true;
 		draft.error = null;
 		draft.user = user;
-		draft.isAuthenticated = Boolean(user);
 	},
 	[LOGIN + FAILURE]: (draft, { error }) => {
 		draft.loading = false;
