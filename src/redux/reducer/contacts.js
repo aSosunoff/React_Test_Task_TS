@@ -17,6 +17,8 @@ const initialState = {
 const handlers = {
 	[LOAD_CONTACTS + REQUEST]: (draft) => {
 		draft.loading = true;
+		draft.loaded = false;
+		draft.error = null;
 	},
 	[LOAD_CONTACTS + SUCCESS]: (draft, { response }) => {
 		draft.loading = false;
