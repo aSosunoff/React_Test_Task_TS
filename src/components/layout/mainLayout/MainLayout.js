@@ -9,9 +9,14 @@ const MainLayout = ({ isAuthenticated, user, children, ...props }) => {
 		<Redirect exact from="*" to="/login" />
 	) : (
 		<>
-			<nav>
+			<nav
+				className="blue-grey darken-1"
+				style={{
+					marginBottom: "15px",
+				}}
+			>
 				<div className="nav-wrapper">
-					<ul id="nav-mobile" className="left hide-on-med-and-down">
+					<ul id="nav-mobile" className="left">
 						<li>
 							<Link to="/">
 								<i className="material-icons" title="контакты">
@@ -21,7 +26,7 @@ const MainLayout = ({ isAuthenticated, user, children, ...props }) => {
 						</li>
 					</ul>
 
-					<ul id="nav-mobile" className="right hide-on-med-and-down">
+					<ul id="nav-mobile" className="right">
 						<li>
 							<Link to="/profile">
 								<i className="material-icons" title={user.name}>
