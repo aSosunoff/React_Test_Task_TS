@@ -10,17 +10,34 @@ const MainLayout = ({ isAuthenticated, user, children, ...props }) => {
 	) : (
 		<>
 			<nav>
-				<ul>
-					<li>
-						<Link to="/">Contacts</Link>
-					</li>
-					<li>
-						<Link to="/logout">Logout</Link>
-					</li>
-					<li>
-						<a href="#">{user.name}</a>
-					</li>
-				</ul>
+				<div className="nav-wrapper">
+					<ul id="nav-mobile" className="left hide-on-med-and-down">
+						<li>
+							<Link to="/">
+								<i className="material-icons" title="контакты">
+									import_contacts
+								</i>
+							</Link>
+						</li>
+					</ul>
+
+					<ul id="nav-mobile" className="right hide-on-med-and-down">
+						<li>
+							<Link to="/profile">
+								<i className="material-icons" title={user.name}>
+									person_pin
+								</i>
+							</Link>
+						</li>
+						<li>
+							<Link to="/logout">
+								<i className="material-icons" title="выход">
+									exit_to_app
+								</i>
+							</Link>
+						</li>
+					</ul>
+				</div>
 			</nav>
 
 			<div className="container">
