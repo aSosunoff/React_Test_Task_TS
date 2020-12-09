@@ -25,15 +25,11 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 
 	useEffect(() => {
 		if (!loading && loaded && isAuthenticated) {
-			return history.push("/");
-		}
-
-		if (!loading && loaded && !isAuthenticated) {
-			return warning("Введены не верные данные");
-		}
-
-		if (error) {
-			return danger(error.message);
+			history.push("/");
+		} else if (!loading && loaded && !isAuthenticated) {
+			warning("Введены не верные данные");
+		} else if (error) {
+			danger(error.message);
 		}
 	}, [history, isAuthenticated, loading, error, loaded]);
 
