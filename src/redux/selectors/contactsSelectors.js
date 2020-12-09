@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { getById } from "../utils";
 
 const contactsSelector = (state) => state.contacts;
 
@@ -6,6 +7,8 @@ export const listSelector = createSelector(
 	contactsSelector,
 	({ contacts }) => contacts
 );
+
+export const contactSelector = getById(listSelector);
 
 export const loadingSelector = createSelector(
 	contactsSelector,
