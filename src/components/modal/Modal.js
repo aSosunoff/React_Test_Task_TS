@@ -1,18 +1,3 @@
-/* import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { contactSelector } from "../../redux/selectors/contactsSelectors";
-
-const Modal = ({ contact }) => {
-	return <div>{JSON.stringify(contact)}</div>;
-};
-
-export default connect(
-	createStructuredSelector({
-		contact: contactSelector,
-	})
-)(Modal);
- */
 import React, { useCallback, useMemo } from "react";
 import cn from "classnames";
 import styles from "./modal.module.scss";
