@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Table from "@asosunoff/react-table";
-import { loadContacts, deleteContacts, addContacts } from "../redux/actions";
+import { loadContacts, deleteContacts } from "../redux/actions";
 import { contactsSelectors } from "../redux/selectors";
 import { danger } from "../utils/toast";
 import ModalContact from "../components/modalContact";
@@ -12,7 +12,6 @@ const Contacts = ({
 	loadContacts,
 	deleteContacts,
 	contactsError,
-	addContacts,
 	contacts,
 }) => {
 	useEffect(() => {
@@ -79,10 +78,8 @@ const Contacts = ({
 					{
 						title: "Добавить контакт",
 						handler: () => {
-							addContacts({
-								title: "test",
-								author: "test author",
-							});
+							show();
+							setIdContact(null);
 						},
 					},
 				]}
@@ -101,6 +98,5 @@ export default connect(
 	{
 		loadContacts,
 		deleteContacts,
-		addContacts,
 	}
 )(Contacts);
