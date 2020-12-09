@@ -4,6 +4,7 @@ import {
 	LOAD_CONTACTS,
 	DELETE_CONTACTS,
 	ADD_CONTACTS,
+	EDIT_CONTACTS,
 } from "./types";
 
 export const login = (user) => ({
@@ -37,4 +38,11 @@ export const addContacts = (contactNew) => ({
 	CallAPI: "contacts",
 	methodAPI: "post",
 	paramsAPI: contactNew,
+});
+
+export const editContacts = ({ id, ...contact }) => ({
+	type: EDIT_CONTACTS,
+	CallAPI: `contacts/${id}`,
+	methodAPI: "put",
+	paramsAPI: contact,
 });

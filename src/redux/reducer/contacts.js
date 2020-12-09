@@ -2,6 +2,7 @@ import produce from "immer";
 import {
 	LOAD_CONTACTS,
 	ADD_CONTACTS,
+	EDIT_CONTACTS,
 	DELETE_CONTACTS,
 	CLEAR_CONTACTS,
 	REQUEST,
@@ -34,13 +35,17 @@ const handlers = {
 		draft.error = error;
 	},
 	[DELETE_CONTACTS + SUCCESS]: (draft, { id }) => {
-		draft.contacts.splice(
-			draft.contacts.findIndex((contact) => contact.id === id),
-			1
-		);
+		const index = draft.contacts.findIndex((contact) => contact.id === id);
+		draft.contacts.splice(index, 1);
 	},
 	[ADD_CONTACTS + SUCCESS]: (draft, { response }) => {
 		draft.contacts.push(response);
+	},
+	[EDIT_CONTACTS + SUCCESS]: (draft, { response }) => {
+		const index = draft.contacts.findIndex(
+			(contact) => contact.id === response.id
+		);
+		draft.contacts.splice(index, 1, response);
 	},
 	[CLEAR_CONTACTS]: () => initialState,
 	DEFAULT: (state) => state,

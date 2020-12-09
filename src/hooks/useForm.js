@@ -45,6 +45,15 @@ export default (initialValues = {}, initialValidation = {}) => {
 		[validate, values]
 	);
 
+	const isDisabledAll = useMemo(
+		() =>
+			Object.values(handlers).reduce(
+				(acc, { invalid }) => acc || invalid,
+				false
+			),
+		[handlers]
+	);
+
 	const setValue = useCallback((key, value) => {
 		if (typeof key === "object") {
 			setValues((prev) => ({ ...prev, ...key }));
@@ -62,5 +71,6 @@ export default (initialValues = {}, initialValidation = {}) => {
 		reset: () => setValues(initialValues),
 		handlers,
 		setValue,
+		isDisabledAll,
 	};
 };

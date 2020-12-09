@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -35,15 +35,9 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 		}
 	}, [history, isAuthenticated, loading, error, loaded]);
 
-	const { values, handlers } = useForm(INITIAL_VALUES, INITIAL_VALIDATE);
-
-	const disabledSubmit = useMemo(
-		() =>
-			Object.values(handlers).reduce(
-				(acc, { invalid }) => acc || invalid,
-				false
-			),
-		[handlers]
+	const { values, handlers, isDisabledAll } = useForm(
+		INITIAL_VALUES,
+		INITIAL_VALIDATE
 	);
 
 	const loginHandler = useCallback(
@@ -87,7 +81,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 			</div>
 
 			<div className="card-action">
-				<BlackButton type="submit" disabled={disabledSubmit || loading}>
+				<BlackButton type="submit" disabled={isDisabledAll || loading}>
 					Войти
 					<i className="material-icons right">send</i>
 				</BlackButton>

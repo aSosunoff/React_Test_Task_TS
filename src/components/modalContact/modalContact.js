@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import useForm from "../../hooks/useForm";
+import { editContacts } from "../../redux/actions";
 import { contactSelector } from "../../redux/selectors/contactsSelectors";
 import Modal from "../modal";
 import BaseButton from "../UI/button/baseButton";
 import Input from "../UI/input";
+import { info } from "../../utils/toast";
 
 const INITIAL_VALUES = { id: null, title: "", author: "" };
 const INITIAL_VALIDATE = {
@@ -18,27 +20,36 @@ const INITIAL_VALIDATE = {
 	},
 };
 
-function ModalContact({ contact }) {
-	const [isShowModal, setShowModal] = useState(false);
-
-	const { values, handlers, setValue } = useForm(
+function ModalContact({
+	contact,
+	editContacts,
+	isShow,
+	onHideModal,
+	...props
+}) {
+	const { values, handlers, setValue, isDisabledAll } = useForm(
 		INITIAL_VALUES,
 		INITIAL_VALIDATE
 	);
 
 	useEffect(() => {
-		if (contact) {
-			setShowModal(true);
+		if (isShow) {
 			setValue({
 				id: contact.id,
 				title: contact.title,
 				author: contact.author,
 			});
 		}
-	}, [setValue, contact]);
+	}, [setValue, isShow, contact]);
+
+	const submitHandler = useCallback(() => {
+		editContacts(values);
+		info("Контакт изменён");
+		onHideModal();
+	}, [values, editContacts, onHideModal]);
 
 	return (
-		<Modal isShow={isShowModal} onHideModal={() => setShowModal(false)}>
+		<Modal isShow={isShow} onHideModal={onHideModal} {...props}>
 			<Modal.Title>Добавление / Редактирование контактов</Modal.Title>
 
 			<Modal.Body>
@@ -60,11 +71,7 @@ function ModalContact({ contact }) {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<BaseButton
-					onClick={() => {
-						console.log(values);
-					}}
-				>
+				<BaseButton disabled={isDisabledAll} onClick={submitHandler}>
 					Сохранить
 				</BaseButton>
 			</Modal.Footer>
@@ -75,5 +82,6 @@ function ModalContact({ contact }) {
 export default connect(
 	createStructuredSelector({
 		contact: contactSelector,
-	})
+	}),
+	{ editContacts }
 )(ModalContact);

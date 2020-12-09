@@ -26,6 +26,8 @@ const Contacts = ({
 
 	const [idContact, setIdContact] = useState(null);
 
+	const [isShowModal, setShowModal] = useState(false);
+
 	return (
 		<>
 			<Table
@@ -58,7 +60,10 @@ const Contacts = ({
 				rowsBtn={[
 					{
 						title: "Редактировать контакт",
-						handler: ({ id }) => setIdContact(id),
+						handler: ({ id }) => {
+							setShowModal(true);
+							setIdContact(id);
+						},
 						icon: "edit",
 					},
 					{
@@ -82,7 +87,11 @@ const Contacts = ({
 				onUnselectRecord={() => setIdContact(null)}
 			/>
 
-			<ModalContact id={idContact} />
+			<ModalContact
+				id={idContact}
+				isShow={isShowModal}
+				onHideModal={() => setShowModal(false)}
+			/>
 		</>
 	);
 };
