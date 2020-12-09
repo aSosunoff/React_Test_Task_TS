@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export default (initialValues = {}, initialValidation = {}) => {
 	const [values, setValues] = useState(initialValues);
@@ -45,9 +45,13 @@ export default (initialValues = {}, initialValidation = {}) => {
 		[validate, values]
 	);
 
-	function setValue(key, value) {
-		setValues((prev) => ({ ...prev, [key]: value }));
-	}
+	const setValue = useCallback((key, value) => {
+		if (typeof key === "object") {
+			setValues((prev) => ({ ...prev, ...key }));
+		} else {
+			setValues((prev) => ({ ...prev, [key]: value }));
+		}
+	}, []);
 
 	function onChange(key) {
 		return (ev) => setValue(key, ev.target ? ev.target.value : ev);
@@ -57,5 +61,6 @@ export default (initialValues = {}, initialValidation = {}) => {
 		values,
 		reset: () => setValues(initialValues),
 		handlers,
+		setValue,
 	};
 };
