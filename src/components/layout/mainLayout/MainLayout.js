@@ -1,8 +1,11 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
-const MainLayout = ({ children, ...props }) => {
-	return (
+const MainLayout = ({ isAuthenticated, children, ...props }) => {
+	return !isAuthenticated ? (
+		<Redirect exact from="*" to="/login" />
+	) : (
 		<>
 			<nav>
 				<ul>
@@ -22,4 +25,10 @@ const MainLayout = ({ children, ...props }) => {
 	);
 };
 
-export default MainLayout;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authUser.isAuthenticated,
+	};
+};
+
+export default connect(mapStateToProps)(MainLayout);
