@@ -1,6 +1,6 @@
 import React from "react";
 import BaseButton from "../baseButton";
-import styles from "./BlackButton.module.scss";
+import styles from "./blackButton.module.scss";
 
 const BlackButton = ({ children, ...props }) => (
 	<BaseButton

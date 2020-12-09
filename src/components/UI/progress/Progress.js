@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
-import styles from "./Progress.module.scss";
+import styles from "./progress.module.scss";
 
 const Progress = ({ canVisible }) => {
 	return (

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { authUserSelectors } from "../../../redux/selectors/";
+import { authUserSelectors } from "../../../redux/selectors";
 
 const MainLayout = ({ isAuthenticated, user, children, ...props }) => {
 	return !isAuthenticated ? (

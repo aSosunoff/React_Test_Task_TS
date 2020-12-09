@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
-import styles from "./BaseButton.module.scss";
+import styles from "./baseButton.module.scss";
 
 const BaseButton = ({
 	tag,

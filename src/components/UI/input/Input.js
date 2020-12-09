@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
 import cn from "classnames";
-import styles from "./Input.module.scss";
+import styles from "./input.module.scss";
 
 const Input = ({
 	type,
