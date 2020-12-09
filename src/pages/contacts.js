@@ -15,7 +15,7 @@ const Contacts = ({ loadContacts, contactsError, contacts }) => {
 		if (contactsError) {
 			danger(contactsError.message);
 		}
-	}, [loadContacts]);
+	}, [contactsError]);
 
 	return (
 		<Table
