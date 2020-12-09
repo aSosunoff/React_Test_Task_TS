@@ -4,6 +4,7 @@ import EmptyLayout from "../layout/emptyLayout";
 import MainLayout from "../layout/mainLayout";
 import Contacts from "../pages/contacts";
 import Login from "../pages/login";
+import Logout from "../pages/logout";
 
 const App = () => {
 	return (
@@ -13,6 +14,10 @@ const App = () => {
 
 				<MainLayout path="/contacts">
 					<Contacts />
+				</MainLayout>
+
+				<MainLayout path="/logout">
+					<Logout />
 				</MainLayout>
 
 				<EmptyLayout path="/login">

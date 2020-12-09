@@ -1,4 +1,4 @@
-import { LOGIN } from "./types";
+import { LOGIN, LOGOUT } from "./types";
 
 export const login = (user) => ({
 	type: LOGIN,
@@ -7,6 +7,10 @@ export const login = (user) => ({
 	paramsAPI: {
 		params: user,
 	},
+});
+
+export const logout = () => ({
+	type: LOGOUT,
 });
 
 /* window.M.toast({ html, classes: 'info' }); */

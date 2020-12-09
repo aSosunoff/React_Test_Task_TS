@@ -29,7 +29,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 		}
 
 		if (!loading && loaded && !isAuthenticated) {
-			warning("Введены не верные данные");
+			return warning("Введены не верные данные");
 		}
 
 		if (error) {

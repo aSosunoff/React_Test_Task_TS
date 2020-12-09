@@ -13,7 +13,7 @@ const MainLayout = ({ isAuthenticated, children, ...props }) => {
 						<Link to="/">Contacts</Link>
 					</li>
 					<li>
-						<Link to="/login">Login</Link>
+						<Link to="/logout">Logout</Link>
 					</li>
 				</ul>
 			</nav>
