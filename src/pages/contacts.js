@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import Table from "@asosunoff/react-table";
-import { loadContacts } from "../redux/actions";
+import { loadContacts, deleteContacts, addContacts } from "../redux/actions";
 import { contactsSelectors } from "../redux/selectors";
 import { danger } from "../utils/toast";
 
-const Contacts = ({ loadContacts, contactsError, contacts }) => {
+const Contacts = ({
+	loadContacts,
+	deleteContacts,
+	contactsError,
+	addContacts,
+	contacts,
+}) => {
 	useEffect(() => {
 		loadContacts();
 	}, [loadContacts]);
@@ -45,6 +51,24 @@ const Contacts = ({ loadContacts, contactsError, contacts }) => {
 					},
 				},
 			}}
+			rowsBtn={[
+				{
+					title: "Удалить контакт",
+					handler: ({ id }) => deleteContacts(id),
+					icon: "delete",
+				},
+			]}
+			controlPanel={[
+				{
+					title: "Добавить контакт",
+					handler: () => {
+						addContacts({
+							title: "test",
+							author: "test author",
+						});
+					},
+				},
+			]}
 			pageSize={10}
 		/>
 	);
@@ -57,5 +81,7 @@ export default connect(
 	}),
 	{
 		loadContacts,
+		deleteContacts,
+		addContacts,
 	}
 )(Contacts);

@@ -1,7 +1,7 @@
 import { FAILURE, REQUEST, SUCCESS } from "../types";
 import axios from "../../utils/axios";
 
-/* window.axios = axios; */
+window.axios = axios;
 /* axios.post('profile', { id: 1, name: '1', password: '123' }) */
 /* axios.put('profile/1', { name: '1', password: '123121212' }) */
 /* http://zetcode.com/javascript/jsonserver/ */

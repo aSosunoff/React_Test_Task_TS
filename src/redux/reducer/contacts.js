@@ -1,6 +1,8 @@
 import produce from "immer";
 import {
 	LOAD_CONTACTS,
+	ADD_CONTACTS,
+	DELETE_CONTACTS,
 	CLEAR_CONTACTS,
 	REQUEST,
 	SUCCESS,
@@ -30,6 +32,15 @@ const handlers = {
 		draft.loading = false;
 		draft.loaded = false;
 		draft.error = error;
+	},
+	[DELETE_CONTACTS + SUCCESS]: (draft, { id }) => {
+		draft.contacts.splice(
+			draft.contacts.findIndex((contact) => contact.id === id),
+			1
+		);
+	},
+	[ADD_CONTACTS + SUCCESS]: (draft, { response }) => {
+		draft.contacts.push(response);
 	},
 	[CLEAR_CONTACTS]: () => initialState,
 	DEFAULT: (state) => state,
