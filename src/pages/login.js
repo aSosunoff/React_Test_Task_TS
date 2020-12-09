@@ -3,13 +3,13 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import useForm from "../../hooks/useForm";
-import BlackButton from "../UI/button/blackButton";
-import Input from "../UI/input";
-import Progress from "../UI/progress/Progress";
-import { danger, warning } from "../../utils/toast";
-import { login } from "../../redux/actions";
-import { authUserSelectors } from "../../redux/selectors/";
+import useForm from "../hooks/useForm";
+import BlackButton from "../components/UI/button/blackButton";
+import Input from "../components/UI/input";
+import Progress from "../components/UI/progress/Progress";
+import { danger, warning } from "../utils/toast";
+import { login } from "../redux/actions";
+import { authUserSelectors } from "../redux/selectors";
 
 const INITIAL_VALUES = { login: "admin", password: "1234" };
 const INITIAL_VALIDATE = {
