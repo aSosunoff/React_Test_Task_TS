@@ -31,6 +31,8 @@ const Contacts = ({
 
 	return (
 		<>
+			<ModalContact id={idContact} isShow={isShow} onHideModal={hide} />
+
 			<Table
 				title="Контакты"
 				list={contacts}
@@ -87,8 +89,6 @@ const Contacts = ({
 				pageSize={10}
 				onUnselectRecord={() => setIdContact(null)}
 			/>
-
-			<ModalContact id={idContact} isShow={isShow} onHideModal={hide} />
 		</>
 	);
 };
