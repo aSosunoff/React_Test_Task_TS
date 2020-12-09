@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import useForm from "../../hooks/useForm";
 import BlackButton from "../UI/button/blackButton";
@@ -8,10 +9,11 @@ import Input from "../UI/input";
 import Progress from "../UI/progress/Progress";
 import { danger, warning } from "../../utils/toast";
 import { login } from "../../redux/actions";
+import { authUserSelectors } from "../../redux/selectors/";
 
-const INITIAL_VALUES = { name: "admin", password: "1234" };
+const INITIAL_VALUES = { login: "admin", password: "1234" };
 const INITIAL_VALIDATE = {
-	name: {
+	login: {
 		required: true,
 	},
 	password: {
@@ -67,10 +69,10 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 				<Input
 					label="Логин"
 					disabled={loading}
-					value={handlers.name.value}
-					onChange={handlers.name.onChange}
-					invalid={handlers.name.invalid}
-					invalidMessage={handlers.name.invalidMessage}
+					value={handlers.login.value}
+					onChange={handlers.login.onChange}
+					invalid={handlers.login.invalid}
+					invalidMessage={handlers.login.invalidMessage}
 				/>
 
 				<Input
@@ -96,17 +98,14 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		isAuthenticated: state.authUser.isAuthenticated,
-		loading: state.authUser.loading,
-		loaded: state.authUser.loaded,
-		error: state.authUser.error,
-	};
-};
-
-const mapDispatchToProps = {
-	login,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+	createStructuredSelector({
+		isAuthenticated: authUserSelectors.isAuthenticatedSelector,
+		loading: authUserSelectors.loginLoadingSelector,
+		loaded: authUserSelectors.loginLoadedSelector,
+		error: authUserSelectors.loginErrorSelector,
+	}),
+	{
+		login,
+	}
+)(Login);

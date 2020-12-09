@@ -10,8 +10,6 @@ const Logout = ({ logout }) => {
 	return <div>Ждём вас ещё</div>;
 };
 
-const mapDispatchToProps = {
+export default connect(null, {
 	logout,
-};
-
-export default connect(null, mapDispatchToProps)(Logout);
+})(Logout);

@@ -16,13 +16,15 @@
 	"profile": [
 		{
 			"id": 1,
-			"name": "admin",
-			"password": "1234"
+			"login": "admin",
+			"password": "1234",
+			"name": "Alex"
 		},
 		{
 			"id": 2,
-			"name": "admin2",
-			"password": "4321"
+			"login": "admin2",
+			"password": "4321",
+			"name": "Pol"
 		}
 	]
 }

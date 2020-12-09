@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { authUserSelectors } from "../../../redux/selectors/";
 
-const MainLayout = ({ isAuthenticated, children, ...props }) => {
+const MainLayout = ({ isAuthenticated, user, children, ...props }) => {
 	return !isAuthenticated ? (
 		<Redirect exact from="*" to="/login" />
 	) : (
@@ -15,6 +17,9 @@ const MainLayout = ({ isAuthenticated, children, ...props }) => {
 					<li>
 						<Link to="/logout">Logout</Link>
 					</li>
+					<li>
+						<a href="#">{user.name}</a>
+					</li>
 				</ul>
 			</nav>
 
@@ -25,10 +30,9 @@ const MainLayout = ({ isAuthenticated, children, ...props }) => {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		isAuthenticated: state.authUser.isAuthenticated,
-	};
-};
-
-export default connect(mapStateToProps)(MainLayout);
+export default connect(
+	createStructuredSelector({
+		isAuthenticated: authUserSelectors.isAuthenticatedSelector,
+		user: authUserSelectors.userSelector,
+	})
+)(MainLayout);
