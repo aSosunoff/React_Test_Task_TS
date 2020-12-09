@@ -1,18 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import axios from "../../utils/axios";
+import React, { useCallback, useEffect, useMemo } from "react";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+
 import useForm from "../../hooks/useForm";
 import BlackButton from "../UI/button/blackButton";
 import Input from "../UI/input";
 import Progress from "../UI/progress/Progress";
 import { danger, warning } from "../../utils/toast";
-import { useHistory } from "react-router-dom";
-
-/* window.M.toast({ html, classes: 'info' }); */
-/* window.axios = axios; */
-/* axios.get('profile', { params: { name: 'admin24' }}).then(({ data }) => console.log(data)) */
-/* axios.post('profile', { id: 1, name: '1', password: '123' }) */
-/* axios.put('profile/1', { name: '1', password: '123121212' }) */
-/* http://zetcode.com/javascript/jsonserver/ */
+import { login } from "../../redux/actions";
 
 const INITIAL_VALUES = { name: "admin", password: "1234" };
 const INITIAL_VALIDATE = {
@@ -25,18 +20,22 @@ const INITIAL_VALIDATE = {
 	},
 };
 
-const Login = () => {
+const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 	const history = useHistory();
 
-	const [isAuthenticated, setAuthenticated] = useState(false);
-
 	useEffect(() => {
-		if (isAuthenticated) {
-			history.push("/");
+		if (!loading && loaded && isAuthenticated) {
+			return history.push("/");
 		}
-	}, [history, isAuthenticated]);
 
-	const [checkForm, setCheckForm] = useState(false);
+		if (!loading && loaded && !isAuthenticated) {
+			warning("Введены не верные данные");
+		}
+
+		if (error) {
+			return danger(error.message);
+		}
+	}, [history, isAuthenticated, loading, error, loaded]);
 
 	const { values, handlers } = useForm(INITIAL_VALUES, INITIAL_VALIDATE);
 
@@ -50,30 +49,11 @@ const Login = () => {
 	);
 
 	const loginHandler = useCallback(
-		async (e) => {
+		(e) => {
 			e.preventDefault();
-
-			setCheckForm(true);
-
-			try {
-				const {
-					data: [user],
-				} = await axios.get("profile", {
-					params: values,
-				});
-
-				if (!user) {
-					warning("Введены не верные данные");
-				} else {
-					setAuthenticated(true);
-				}
-			} catch (ex) {
-				danger(JSON.stringify(ex));
-			} finally {
-				setCheckForm(false);
-			}
+			login(values);
 		},
-		[setCheckForm, values]
+		[login, values]
 	);
 
 	return (
@@ -90,7 +70,7 @@ const Login = () => {
 
 				<Input
 					label="Логин"
-					disabled={checkForm}
+					disabled={loading}
 					value={handlers.name.value}
 					onChange={handlers.name.onChange}
 					invalid={handlers.name.invalid}
@@ -100,7 +80,7 @@ const Login = () => {
 				<Input
 					label="Пароль"
 					type="password"
-					disabled={checkForm}
+					disabled={loading}
 					value={handlers.password.value}
 					onChange={handlers.password.onChange}
 					invalid={handlers.password.invalid}
@@ -109,15 +89,28 @@ const Login = () => {
 			</div>
 
 			<div className="card-action">
-				<BlackButton type="submit" disabled={disabledSubmit || checkForm}>
+				<BlackButton type="submit" disabled={disabledSubmit || loading}>
 					Войти
 					<i className="material-icons right">send</i>
 				</BlackButton>
 			</div>
 
-			<Progress canVisible={checkForm} />
+			<Progress canVisible={loading} />
 		</form>
 	);
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authUser.isAuthenticated,
+		loading: state.authUser.loading,
+		loaded: state.authUser.loaded,
+		error: state.authUser.error,
+	};
+};
+
+const mapDispatchToProps = {
+	login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
