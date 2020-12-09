@@ -1,16 +1,14 @@
 {
-	"posts": [
+	"contact": [
 		{
 			"id": 1,
 			"title": "json-server",
 			"author": "typicode"
-		}
-	],
-	"comments": [
+		},
 		{
-			"id": 1,
-			"body": "some comment",
-			"postId": 1
+			"id": 2,
+			"title": "2",
+			"author": "3"
 		}
 	],
 	"profile": [
