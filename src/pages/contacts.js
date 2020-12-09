@@ -5,7 +5,7 @@ import Table from "@asosunoff/react-table";
 import { loadContacts, deleteContacts, addContacts } from "../redux/actions";
 import { contactsSelectors } from "../redux/selectors";
 import { danger } from "../utils/toast";
-/* import Modal from "../components/modal"; */
+import ModalContact from "../components/modalContact";
 
 const Contacts = ({
 	loadContacts,
@@ -82,7 +82,7 @@ const Contacts = ({
 				onUnselectRecord={() => setIdContact(null)}
 			/>
 
-			{/* <Modal id={idContact} /> */}
+			<ModalContact id={idContact} />
 		</>
 	);
 };
