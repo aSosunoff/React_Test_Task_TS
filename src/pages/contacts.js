@@ -6,6 +6,7 @@ import { loadContacts, deleteContacts, addContacts } from "../redux/actions";
 import { contactsSelectors } from "../redux/selectors";
 import { danger } from "../utils/toast";
 import ModalContact from "../components/modalContact";
+import useShow from "../hooks/useShow";
 
 const Contacts = ({
 	loadContacts,
@@ -26,7 +27,7 @@ const Contacts = ({
 
 	const [idContact, setIdContact] = useState(null);
 
-	const [isShowModal, setShowModal] = useState(false);
+	const { isShow, show, hide } = useShow(false);
 
 	return (
 		<>
@@ -61,7 +62,7 @@ const Contacts = ({
 					{
 						title: "Редактировать контакт",
 						handler: ({ id }) => {
-							setShowModal(true);
+							show();
 							setIdContact(id);
 						},
 						icon: "edit",
@@ -87,11 +88,7 @@ const Contacts = ({
 				onUnselectRecord={() => setIdContact(null)}
 			/>
 
-			<ModalContact
-				id={idContact}
-				isShow={isShowModal}
-				onHideModal={() => setShowModal(false)}
-			/>
+			<ModalContact id={idContact} isShow={isShow} onHideModal={hide} />
 		</>
 	);
 };
