@@ -9,7 +9,7 @@ export const userSelector = createSelector(
 
 export const isAuthenticatedSelector = createSelector(
 	authUserSelector,
-	({ user }) => Object.keys(user).length
+	({ user }) => user && Object.keys(user).length
 );
 
 export const loginLoadingSelector = createSelector(

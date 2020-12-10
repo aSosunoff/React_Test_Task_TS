@@ -20,3 +20,5 @@ cd React_Test_Task_TS
 npm i
 npm start
 ```
+
+![TZ](./test1.gif)

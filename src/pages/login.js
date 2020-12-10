@@ -13,11 +13,11 @@ import { authUserSelectors } from "../redux/selectors";
 
 const INITIAL_VALUES = {
 	login: {
-		value: "admin",
+		value: "",
 		validation: { required: true },
 	},
 	password: {
-		value: "1234",
+		value: "",
 		validation: {
 			required: true,
 			minLength: 4,
@@ -65,7 +65,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 					disabled={loading}
 					value={handlers.login.value}
 					onChange={handlers.login.onChange}
-					invalid={handlers.login.invalid}
+					invalid={handlers.login.touched && handlers.login.invalid}
 					invalidMessage={handlers.login.invalidMessage}
 				/>
 
@@ -75,7 +75,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 					disabled={loading}
 					value={handlers.password.value}
 					onChange={handlers.password.onChange}
-					invalid={handlers.password.invalid}
+					invalid={handlers.password.touched && handlers.password.invalid}
 					invalidMessage={handlers.password.invalidMessage}
 				/>
 			</div>
