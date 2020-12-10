@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import useForm from "../../hooks/useForm";
+import { useForm } from "../../hooks/useForm/useForm";
 import { editContacts, addContacts } from "../../redux/actions";
 import { contactSelector } from "../../redux/selectors/contactsSelectors";
 import Modal from "../modal";
@@ -10,13 +10,15 @@ import BaseButton from "../UI/button/baseButton";
 import Input from "../UI/input";
 import { info } from "../../utils/toast";
 
-const INITIAL_VALUES = { id: null, title: "", author: "" };
-const INITIAL_VALIDATE = {
+const INITIAL_VALUES = {
+	id: null,
 	title: {
-		required: true,
+		value: "",
+		validation: { required: true },
 	},
 	author: {
-		required: true,
+		value: "",
+		validation: { required: true },
 	},
 };
 
@@ -27,22 +29,23 @@ function ModalContact({
 	isShow,
 	onHideModal,
 }) {
-	const { values, handlers, setValue, isDisabledAll } = useForm(
-		INITIAL_VALUES,
-		INITIAL_VALIDATE
+	const { values, handlers, setValue, reset, isDisabledAll } = useForm(
+		INITIAL_VALUES
 	);
 
 	useEffect(() => {
-		if (isShow && contact?.id) {
-			setValue({
-				id: contact.id,
-				title: contact.title,
-				author: contact.author,
-			});
-		} else {
-			setValue(INITIAL_VALUES);
+		if (isShow) {
+			if (contact?.id) {
+				setValue({
+					id: contact.id,
+					title: contact.title,
+					author: contact.author,
+				});
+			} else {
+				reset();
+			}
 		}
-	}, [setValue, isShow, contact]);
+	}, [setValue, reset, isShow, contact]);
 
 	const submitEditHandler = useCallback(() => {
 		editContacts(values);
@@ -61,14 +64,16 @@ function ModalContact({
 
 	return (
 		<Modal isShow={isShow} onHideModal={onHideModal}>
-			<Modal.Title>Добавление / Редактирование контактов</Modal.Title>
+			<Modal.Title>
+				{contact?.id ? "Редактирование" : "Добавление"} контактов
+			</Modal.Title>
 
 			<Modal.Body>
 				<Input
 					label="Наименование"
 					value={handlers.title.value}
 					onChange={handlers.title.onChange}
-					invalid={handlers.title.invalid}
+					invalid={handlers.title.touched && handlers.title.invalid}
 					invalidMessage={handlers.title.invalidMessage}
 				/>
 
@@ -76,7 +81,7 @@ function ModalContact({
 					label="Автор"
 					value={handlers.author.value}
 					onChange={handlers.author.onChange}
-					invalid={handlers.author.invalid}
+					invalid={handlers.author.touched && handlers.author.invalid}
 					invalidMessage={handlers.author.invalidMessage}
 				/>
 			</Modal.Body>
@@ -88,7 +93,7 @@ function ModalContact({
 					</BaseButton>
 				) : (
 					<BaseButton disabled={isDisabledAll} onClick={submitAddHandler}>
-						Создать
+						Сохранить
 					</BaseButton>
 				)}
 			</Modal.Footer>

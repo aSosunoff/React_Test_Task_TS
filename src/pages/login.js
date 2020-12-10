@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import useForm from "../hooks/useForm";
+import { useForm } from "../hooks/useForm/useForm";
 import BlackButton from "../components/UI/button/blackButton";
 import Input from "../components/UI/input";
 import Progress from "../components/UI/progress/progress";
@@ -11,14 +11,17 @@ import { danger, warning } from "../utils/toast";
 import { login } from "../redux/actions";
 import { authUserSelectors } from "../redux/selectors";
 
-const INITIAL_VALUES = { login: "admin", password: "1234" };
-const INITIAL_VALIDATE = {
+const INITIAL_VALUES = {
 	login: {
-		required: true,
+		value: "admin",
+		validation: { required: true },
 	},
 	password: {
-		required: true,
-		minLength: 4,
+		value: "1234",
+		validation: {
+			required: true,
+			minLength: 4,
+		},
 	},
 };
 
@@ -35,10 +38,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 		}
 	}, [history, isAuthenticated, loading, error, loaded]);
 
-	const { values, handlers, isDisabledAll } = useForm(
-		INITIAL_VALUES,
-		INITIAL_VALIDATE
-	);
+	const { values, handlers, isDisabledAll } = useForm(INITIAL_VALUES);
 
 	const loginHandler = useCallback(
 		(e) => {

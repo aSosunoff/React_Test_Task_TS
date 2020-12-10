@@ -34,19 +34,19 @@ function Modal({ isShow, onHideModal, children, style }) {
 
 	const title = Array.isArray(children)
 		? children.find((child) => child.type === Title)
-		: children.type === Title
+		: children?.type === Title
 		? children
 		: null;
 
 	const body = Array.isArray(children)
 		? children.find((child) => child.type === Body)
-		: children.type === Body
+		: children?.type === Body
 		? children
 		: null;
 
 	const footer = Array.isArray(children)
 		? children.find((child) => child.type === Footer)
-		: children.type === Footer
+		: children?.type === Footer
 		? children
 		: null;
 
