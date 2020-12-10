@@ -11,8 +11,19 @@ https://github.com/typicode/json-server
 * В разработке можно пользоваться UI фреймворками.
 * Время на выполнение тестового задания не ограничено.
 
+### Для таблицы использовал собственный компонент
+---
+репозиторий:
 
-### Для установки
+[https://asosunoff.github.io/React-Table/](https://asosunoff.github.io/React-Table/)
+
+npm:
+
+[npm i @asosunoff/react-table](https://www.npmjs.com/package/@asosunoff/react-table)
+
+
+---
+### Для проверки задания:
 ---
 ```
 git clone https://github.com/aSosunoff/React_Test_Task_TS.git
