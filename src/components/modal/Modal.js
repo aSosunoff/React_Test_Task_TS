@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import cn from "classnames";
-import styles from "./modal.module.scss";
+import styles from "./Modal.module.scss";
 import Backdrop from "../backdrop";
 
 const getUnicIdModal = () => `_${Math.random().toString(36).substr(2, 9)}`;

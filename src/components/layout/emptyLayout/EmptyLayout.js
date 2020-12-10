@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import styles from "./emptyLayout.module.scss";
+import styles from "./EmptyLayout.module.scss";
 import cn from "classnames";
 
 const EmptyLayout = ({ children, ...props }) => {

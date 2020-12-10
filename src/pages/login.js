@@ -6,7 +6,7 @@ import { createStructuredSelector } from "reselect";
 import { useForm } from "../hooks/useForm/useForm";
 import BlackButton from "../components/UI/button/blackButton";
 import Input from "../components/UI/input";
-import Progress from "../components/UI/progress/progress";
+import Progress from "../components/UI/progress/Progress";
 import { danger, warning } from "../utils/toast";
 import { login } from "../redux/actions";
 import { authUserSelectors } from "../redux/selectors";

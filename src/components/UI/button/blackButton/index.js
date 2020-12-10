@@ -1,1 +1,1 @@
-export { default } from './blackButton';
+export { default } from './BlackButton';
