@@ -36,8 +36,8 @@ const Contacts = ({
 				title="Контакты"
 				list={contacts}
 				header={{
-					title: {
-						titleHead: "Наименование",
+					name: {
+						titleHead: "Имя",
 						titleCell: true,
 						order: {
 							type: "string",
@@ -47,8 +47,8 @@ const Contacts = ({
 							type: "text",
 						},
 					},
-					author: {
-						titleHead: "Автор",
+					phone: {
+						titleHead: "телефон",
 						titleCell: true,
 						order: {
 							type: "string",

@@ -12,11 +12,11 @@ import { info } from "../../utils/toast";
 
 const INITIAL_VALUES = {
 	id: null,
-	title: {
+	name: {
 		value: "",
 		validation: { required: true },
 	},
-	author: {
+	phone: {
 		value: "",
 		validation: { required: true },
 	},
@@ -36,11 +36,7 @@ function ModalContact({
 	useEffect(() => {
 		if (isShow) {
 			if (contact?.id) {
-				setValue({
-					id: contact.id,
-					title: contact.title,
-					author: contact.author,
-				});
+				setValue(contact);
 			} else {
 				reset();
 			}
@@ -54,10 +50,7 @@ function ModalContact({
 	}, [values, editContacts, onHideModal]);
 
 	const submitAddHandler = useCallback(() => {
-		addContacts({
-			title: values.title,
-			author: values.author,
-		});
+		addContacts(values);
 		info("Контакт добавлен");
 		onHideModal();
 	}, [values, addContacts, onHideModal]);
@@ -70,19 +63,19 @@ function ModalContact({
 
 			<Modal.Body>
 				<Input
-					label="Наименование"
-					value={handlers.title.value}
-					onChange={handlers.title.onChange}
-					invalid={handlers.title.touched && handlers.title.invalid}
-					invalidMessage={handlers.title.invalidMessage}
+					label="Имя"
+					value={handlers.name.value}
+					onChange={handlers.name.onChange}
+					invalid={handlers.name.touched && handlers.name.invalid}
+					invalidMessage={handlers.name.invalidMessage}
 				/>
 
 				<Input
-					label="Автор"
-					value={handlers.author.value}
-					onChange={handlers.author.onChange}
-					invalid={handlers.author.touched && handlers.author.invalid}
-					invalidMessage={handlers.author.invalidMessage}
+					label="Телефон"
+					value={handlers.phone.value}
+					onChange={handlers.phone.onChange}
+					invalid={handlers.phone.touched && handlers.phone.invalid}
+					invalidMessage={handlers.phone.invalidMessage}
 				/>
 			</Modal.Body>
 

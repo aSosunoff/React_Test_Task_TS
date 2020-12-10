@@ -33,11 +33,11 @@ export const deleteContacts = (id) => ({
 	id,
 });
 
-export const addContacts = (contactNew) => ({
+export const addContacts = ({ name, phone }) => ({
 	type: ADD_CONTACTS,
 	CallAPI: "contacts",
 	methodAPI: "post",
-	paramsAPI: contactNew,
+	paramsAPI: { name, phone },
 });
 
 export const editContacts = ({ id, ...contact }) => ({
