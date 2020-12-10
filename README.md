@@ -30,6 +30,8 @@ git clone https://github.com/aSosunoff/React_Test_Task_TS.git
 cd React_Test_Task_TS
 npm i
 npm start
+login: admin
+password: 1234
 ```
 
 ![TZ](./test1.gif)
