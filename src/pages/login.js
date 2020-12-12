@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { useForm } from "../hooks/useForm/useForm";
+import { useForm } from "@asosunoff/react_use_form";
 import BlackButton from "../components/UI/button/blackButton";
 import Input from "../components/UI/input";
 import Progress from "../components/UI/progress/Progress";
@@ -14,13 +14,22 @@ import { authUserSelectors } from "../redux/selectors";
 const INITIAL_VALUES = {
 	login: {
 		value: "",
-		validation: { required: true },
+		validation: {
+			required: {
+				message: "Необходимо заполнить поле",
+			},
+		},
 	},
 	password: {
 		value: "",
 		validation: {
-			required: true,
-			minLength: 4,
+			required: {
+				message: "Необходимо заполнить поле",
+			},
+			minLength: {
+				value: 4,
+				message: "Длина должна быть не меньше 4 символов",
+			},
 		},
 	},
 };
@@ -38,7 +47,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 		}
 	}, [history, isAuthenticated, loading, error, loaded]);
 
-	const { values, handlers, isDisabledAll } = useForm(INITIAL_VALUES);
+	const { values, handlers, isFormInvalid } = useForm(INITIAL_VALUES);
 
 	const loginHandler = useCallback(
 		(e) => {
@@ -81,7 +90,7 @@ const Login = ({ isAuthenticated, login, loading, loaded, error }) => {
 			</div>
 
 			<div className="card-action">
-				<BlackButton type="submit" disabled={isDisabledAll || loading}>
+				<BlackButton type="submit" disabled={isFormInvalid || loading}>
 					Войти
 					<i className="material-icons right">send</i>
 				</BlackButton>

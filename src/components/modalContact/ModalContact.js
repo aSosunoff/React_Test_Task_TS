@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { useForm } from "../../hooks/useForm/useForm";
+import { useForm } from "@asosunoff/react_use_form";
 import { editContacts, addContacts } from "../../redux/actions";
 import { contactSelector } from "../../redux/selectors/contactsSelectors";
 import Modal from "../modal";
@@ -11,14 +11,24 @@ import Input from "../UI/input";
 import { info } from "../../utils/toast";
 
 const INITIAL_VALUES = {
-	id: null,
+	id: {
+		value: null,
+	},
 	name: {
 		value: "",
-		validation: { required: true },
+		validation: {
+			required: {
+				message: "Необходимо заполнить поле",
+			},
+		},
 	},
 	phone: {
 		value: "",
-		validation: { required: true },
+		validation: {
+			required: {
+				message: "Необходимо заполнить поле",
+			},
+		},
 	},
 };
 
@@ -29,9 +39,11 @@ function ModalContact({
 	isShow,
 	onHideModal,
 }) {
-	const { values, handlers, setValue, reset, isDisabledAll } = useForm(
+	const { values, handlers, setValue, reset, isFormInvalid } = useForm(
 		INITIAL_VALUES
 	);
+
+	console.log(isFormInvalid);
 
 	useEffect(() => {
 		if (isShow) {
@@ -81,11 +93,11 @@ function ModalContact({
 
 			<Modal.Footer>
 				{contact?.id ? (
-					<BaseButton disabled={isDisabledAll} onClick={submitEditHandler}>
+					<BaseButton disabled={isFormInvalid} onClick={submitEditHandler}>
 						Сохранить
 					</BaseButton>
 				) : (
-					<BaseButton disabled={isDisabledAll} onClick={submitAddHandler}>
+					<BaseButton disabled={isFormInvalid} onClick={submitAddHandler}>
 						Сохранить
 					</BaseButton>
 				)}
