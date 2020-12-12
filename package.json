@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@asosunoff/react-table": "0.0.12",
-    "@asosunoff/react_use_form": "0.0.2",
+    "@asosunoff/react_use_form": "0.0.4",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
     "concurrently": "^5.3.0",

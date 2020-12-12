@@ -43,8 +43,6 @@ function ModalContact({
 		INITIAL_VALUES
 	);
 
-	console.log(isFormInvalid);
-
 	useEffect(() => {
 		if (isShow) {
 			if (contact?.id) {
