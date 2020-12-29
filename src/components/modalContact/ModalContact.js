@@ -5,7 +5,7 @@ import { createStructuredSelector } from "reselect";
 import { useForm } from "@asosunoff/react_use_form";
 import { editContacts, addContacts } from "../../redux/actions";
 import { contactSelector } from "../../redux/selectors/contactsSelectors";
-import Modal from "../modal";
+import Modal from "@asosunoff/react-modal";
 import BaseButton from "../UI/button/baseButton";
 import Input from "../UI/input";
 import { info } from "../../utils/toast";
