@@ -33,6 +33,8 @@ npm:
 
 ---
 
+> node 14.15.3
+
 ```
 git clone https://github.com/aSosunoff/React_Test_Task_TS.git
 cd React_Test_Task_TS
