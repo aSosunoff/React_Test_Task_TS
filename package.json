@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@asosunoff/react-modal": "0.0.3",
+    "@asosunoff/react-modal": "0.0.4",
     "@asosunoff/react-table": "0.0.12",
     "@asosunoff/react_use_form": "0.0.4",
     "axios": "^0.21.0",
