@@ -37,7 +37,26 @@ const INITIAL_VALUES = {
 };
 
 function ModalContact({ contact, editContacts, addContacts, isShow, onHideModal }) {
-  const { values, handlers, setValue, resetHandler, isInvalidForm } = useForm(INITIAL_VALUES);
+  const initialValues = useMemo(() => {
+    if (contact) {
+      return Object.entries(contact).reduce(
+        (acc, [key, value]) => ({
+          ...acc,
+          [key]: {
+            ...acc[key],
+            value,
+          },
+        }),
+        INITIAL_VALUES
+      );
+    }
+
+    return INITIAL_VALUES;
+  }, [contact]);
+
+  console.log(initialValues);
+
+  const { values, handlers, setValue, resetHandler, isInvalidForm } = useForm(initialValues);
 
   useEffect(() => {
     if (isShow) {
